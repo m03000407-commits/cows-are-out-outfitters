@@ -1,178 +1,89 @@
 <!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>COWS ARE OUT OUTFITTERS</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cows Are Out Outfitters</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
-      padding: 0;
-      background-color: #f2f2f2;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fdf6ec;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     nav {
-      background-color: #fff;
+      width: 100%;
+      background-color: #fff3d4;
       display: flex;
       justify-content: center;
-      gap: 2rem;
-      padding: 1rem;
-      border-bottom: 2px solid #ddd;
+      padding: 1em;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
     nav a {
-      font-size: 1.2rem;
-      text-decoration: underline;
-      font-weight: bold;
+      margin: 0 1em;
+      text-decoration: none;
       color: #333;
-      cursor: pointer;
+      font-weight: bold;
     }
-    .container {
-      padding: 1rem;
+    .logo-container {
+      margin-top: 5vh;
     }
-    .product {
-      background: white;
-      padding: 1rem;
-      margin: 1rem 0;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    .logo-container img {
+      max-width: 90vw;
+      height: auto;
     }
-    .hidden { display: none; }
-    .checkout-btn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      padding: 1rem;
-      background-color: #4CAF50;
+    .section-heading {
+      font-size: 1.8em;
+      margin-top: 3rem;
+      color: #5a4633;
+      text-align: center;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      padding: 2rem;
+      width: 90%;
+    }
+    .gallery img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .cta-button {
+      background-color: #7c4f1d;
       color: white;
+      padding: 1em 2em;
+      margin: 2rem auto;
       border: none;
-      border-radius: 10px;
-      font-size: 1.2rem;
-      display: none;
-      cursor: pointer;
-    }
-    #uploadSection {
-      padding: 1rem;
-      background: white;
-      margin: 1rem;
       border-radius: 8px;
-      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      font-size: 1.2em;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .cta-button:hover {
+      background-color: #5a3615;
     }
   </style>
 </head>
 <body>
   <nav>
-    <a onclick="showCategory('hats')">Hats</a>
-    <a onclick="showCategory('shirts')">Shirts</a>
-    <a onclick="showCategory('hoodies')">Hoodies</a>
-  </nav>  <div id="uploadSection">
-    <h2>Upload Cow Images</h2>
-    <input type="file" multiple onchange="handleImageUpload(event)" />
-    <div id="uploadedImages"></div>
-  </div>  <div class="container">
-    <div id="homepage">
-      <h1>Welcome to COWS ARE OUT OUTFITTERS!</h1>
-      <p>Fun Facts About Us:</p>
-      <ul>
-        <li>We're 100% rustic and country-inspired.</li>
-        <li>All designs feature real Angus cow vibes.</li>
-        <li>Cash App checkout is supported!</li>
-      </ul>
-    </div><div id="products"></div>
-
-  </div><button id="checkoutBtn" class="checkout-btn">Checkout – $0.00</button>
-
-  <script>
-    const categories = {
-      hats: [],
-      shirts: [],
-      hoodies: []
-    };
-
-    const exampleProducts = [
-      {
-        name: "Navy Comfort Colors Shirt",
-        category: "shirts",
-        price: 30.50,
-        colors: ["navy", "black", "royal blue", "dark purple"],
-        sizes: ["S", "M", "L", "XL", "XXL"],
-        image: "shirt.jpg"
-      },
-      {
-        name: "Custom Rope Hat",
-        category: "hats",
-        price: 40.00,
-        colors: ["black", "khaki"],
-        sizes: ["One Size"],
-        image: "ropehat.jpg"
-      },
-      {
-        name: "Hanes Pullover Hoodie",
-        category: "hoodies",
-        price: 49.99,
-        colors: ["white", "black", "light blue", "athletic purple", "wow pink", "safety green", "athletic dark green"],
-        sizes: ["S", "M", "L", "XL", "XXL"],
-        image: "hoodie.jpg"
-      }
-    ];
-
-    let selectedItems = [];
-
-    function showCategory(cat) {
-      document.getElementById("homepage").style.display = "none";
-      const container = document.getElementById("products");
-      container.innerHTML = "";
-      exampleProducts.filter(p => p.category === cat).forEach(product => {
-        const el = document.createElement("div");
-        el.className = "product";
-        el.innerHTML = `
-          <h3>${product.name}</h3>
-          <img src="${product.image}" width="200" /><br>
-          Color:
-          <select>
-            ${product.colors.map(c => `<option value="${c}">${c}</option>`).join('')}
-          </select><br>
-          Size:
-          <select>
-            ${product.sizes.map(s => `<option value="${s}">${s}</option>`).join('')}
-          </select><br>
-          Quantity:
-          <input type="number" value="1" min="1" style="width: 50px" /><br>
-          <button onclick="selectItem('${product.name}', ${product.price}, this)">Select Item</button>
-        `;
-        container.appendChild(el);
-      });
-    }
-
-    function selectItem(name, price, btn) {
-      const container = btn.parentElement;
-      const quantity = parseInt(container.querySelector("input[type=number]").value);
-      const total = price * quantity;
-      selectedItems.push(total);
-      updateCheckout();
-    }
-
-    function updateCheckout() {
-      const total = selectedItems.reduce((sum, x) => sum + x, 0).toFixed(2);
-      const btn = document.getElementById("checkoutBtn");
-      btn.innerText = `Checkout – $${total}`;
-      btn.style.display = "block";
-    }
-
-    function handleImageUpload(event) {
-      const files = event.target.files;
-      const container = document.getElementById("uploadedImages");
-      container.innerHTML = "";
-      for (let file of files) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          const img = document.createElement("img");
-          img.src = e.target.result;
-          img.style.maxWidth = "150px";
-          img.style.margin = "5px";
-          container.appendChild(img);
-        }
-        reader.readAsDataURL(file);
-      }
-    }
-  </script></body>
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Shop</a>
+    <a href="#">Contact</a>
+  </nav>
+  <div class="logo-container">
+    <img src="/mnt/data/A_website_homepage_screenshot_displays_\"Cows_Are_O.png" alt="Cows Are Out Outfitters Logo">
+  </div>
+  <h2 class="section-heading">Life on the Farm</h2>
+  <div class="gallery">
+    <img src="/mnt/data/image1.jpg" alt="Cows in field 1">
+    <img src="/mnt/data/image2.jpg" alt="Cows in field 2">
+    <img src="/mnt/data/image3.jpg" alt="Close-up cow">
+  </div>
+  <button class="cta-button">Shop Now</button>
+</body>
 </html>
- 
