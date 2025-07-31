@@ -1,46 +1,160 @@
-head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cows Are Out Outfitters</title>
   <style>
     body {
+      font-family: Arial, sans-serif;
+      background-color: #fffef9;
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #fdf6ec;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      padding: 0;
     }
-    nav {
-      width: 100%;
-      background-color: #fff3d4;
-      display: flex;
-      justify-content: center;
-      padding: 1em;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    nav a {
-      margin: 0 1em;
-      text-decoration: none;
-      color: #333;
-      font-weight: bold;
-    }
-    .logo-container {
-      margin-top: 5vh;
-    }
-    .logo-container img {
-      max-width: 90vw;
-      height: auto;
-    }
-    .section-heading {
-      font-size: 1.8em;
-      margin-top: 3rem;
-      color: #5a4633;
+    header {
+      background-color: #2f2f2f;
+      color: white;
+      padding: 15px;
       text-align: center;
     }
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1rem;
-      padding: 2rem;
-      
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: #444;
+      padding: 10px;
+      gap: 15px;
+    }
+    nav a {
+      color: white;
+      text-decoration: underline;
+      font-size: 18px;
+    }
+    .product-category {
+      display: none;
+      padding: 20px;
+    }
+    .product {
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin: 10px;
+    }
+    .checkout {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: green;
+      color: white;
+      padding: 10px 20px;
+      display: none;
+    }
+    .cow-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 10px;
+      gap: 10px;
+    }
+    .cow-gallery img {
+      max-width: 100%;
+      width: 200px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Cows Are Out Outfitters</h1>
+</header>
+
+<nav>
+  <a href="#" onclick="showCategory('hats')">Hats</a>
+  <a href="#" onclick="showCategory('shirts')">Shirts</a>
+  <a href="#" onclick="showCategory('hoodies')">Hoodies</a>
+</nav>
+
+<section id="homepage">
+  <div class="cow-gallery">
+    <img src="cow1.jpg" alt="Cow 1">
+    <img src="cow2.jpg" alt="Cow 2">
+    <img src="cow3.jpg" alt="Cow 3">
+  </div>
+  <div style="text-align:center; padding: 20px;">
+    <h2>Fun Facts</h2>
+    <p>We love cows. Our outfitters are inspired by country life and Angus pride.</p>
+  </div>
+</section>
+
+<section id="hats" class="product-category">
+  <h2>Hats</h2>
+  <div class="product">
+    <p>Custom Leather Patch 5-Panel Rope Hat - $40.00</p>
+    <button onclick="selectItem(40)">Select Item</button>
+    <input type="number" min="1" value="1" onchange="updateQuantity(this, 40)">
+  </div>
+  <div class="product">
+    <p>Old School Camo Hat - $50.00</p>
+    <button onclick="selectItem(50)">Select Item</button>
+    <input type="number" min="1" value="1" onchange="updateQuantity(this, 50)">
+  </div>
+</section>
+
+<section id="shirts" class="product-category">
+  <h2>Shirts</h2>
+  <div class="product">
+    <p>Navy, Black, Royal Blue, Dark Purple - $30.50</p>
+    <button onclick="selectItem(30.5)">Select Item</button>
+    <input type="number" min="1" value="1" onchange="updateQuantity(this, 30.5)">
+  </div>
+</section>
+
+<section id="hoodies" class="product-category">
+  <h2>Hoodies</h2>
+  <div class="product">
+    <p>All Colors + Sizes - $49.99</p>
+    <button onclick="selectItem(49.99)">Select Item</button>
+    <input type="number" min="1" value="1" onchange="updateQuantity(this, 49.99)">
+  </div>
+</section>
+
+<div id="checkoutBtn" class="checkout" onclick="checkout()">
+  Checkout – $0.00
+</div>
+
+<script>
+  let total = 0;
+
+  function showCategory(category) {
+    document.getElementById("homepage").style.display = "none";
+    document.querySelectorAll(".product-category").forEach(cat => cat.style.display = "none");
+    document.getElementById(category).style.display = "block";
+  }
+
+  function selectItem(price) {
+    total += price;
+    document.getElementById("checkoutBtn").style.display = "block";
+    updateCheckout();
+  }
+
+  function updateQuantity(input, unitPrice) {
+    const qty = parseInt(input.value);
+    const parent = input.closest(".product");
+    const selected = parent.querySelector("button.selected");
+    if (selected) {
+      total -= unitPrice;
+      total += qty * unitPrice;
+      updateCheckout();
+    }
+  }
+
+  function updateCheckout() {
+    document.getElementById("checkoutBtn").textContent = "Checkout – $" + total.toFixed(2);
+  }
+
+  function checkout() {
+    alert("Send $" + total.toFixed(2) + " to our Cash App: $YourCashTag");
+  }
+</script>
+
+</body>
+</html>
