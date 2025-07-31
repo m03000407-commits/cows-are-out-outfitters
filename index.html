@@ -1,7 +1,8 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Cows Are Out Outfitters</title>
   <style>
     body {
@@ -11,26 +12,59 @@
     }
     header {
       background: #222;
-      color: #fff;
-      padding: 1em;
+      color: white;
+      padding: 1rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
     nav a {
-      color: #fff;
-      margin: 0 1em;
+      color: white;
+      margin: 0 1rem;
       text-decoration: none;
       font-weight: bold;
+      cursor: pointer;
+    }
+    nav a:hover {
+      text-decoration: underline;
     }
     .container {
-      padding: 2em;
+      padding: 2rem;
+    }
+    .category {
+      display: none;
+    }
+    .category.active {
+      display: block;
     }
     .product {
-      background: #fff;
+      background: white;
       border: 1px solid #ccc;
-      padding: 1em;
-      margin-bottom: 1em;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+    .product h2 {
+      margin-top: 0;
+    }
+    select, input[type=number] {
+      margin: 0.5rem 0;
+      padding: 0.3rem;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    button.select-item {
+      background: #28a745;
+      color: white;
+      border: none;
+      padding: 0.5rem;
+      width: 100%;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 5px;
+    }
+    button.select-item:hover {
+      background: #218838;
     }
     .checkout-btn {
       position: fixed;
@@ -38,21 +72,13 @@
       right: 20px;
       background: green;
       color: white;
-      padding: 1em;
-      display: none;
-      border-radius: 10px;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 30px;
       font-weight: bold;
       cursor: pointer;
-    }
-    select, input[type=number] {
-      margin: 0.5em 0;
-      padding: 0.3em;
-    }
-    .category {
       display: none;
-    }
-    .visible {
-      display: block;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
   </style>
 </head>
@@ -60,71 +86,210 @@
   <header>
     <h1>Cows Are Out Outfitters</h1>
     <nav>
-      <a href="#" onclick="showCategory('hats')">Hats</a>
-      <a href="#" onclick="showCategory('shirts')">Shirts</a>
-      <a href="#" onclick="showCategory('hoodies')">Hoodies</a>
+      <a onclick="showCategory('hats')">Hats</a>
+      <a onclick="showCategory('shirts')">Shirts</a>
+      <a onclick="showCategory('hoodies')">Hoodies</a>
     </nav>
   </header>
+
   <div class="container">
-    <!-- Cow images and fun facts will be added here -->
+
+    <!-- Hats -->
     <div id="hats" class="category">
-      <!-- Hat product examples -->
       <div class="product">
-        <h2>Custom Leather Patch 5-Panel Rope Hat</h2>
-        <p>$40.00</p>
-        <select><option>Select Color</option><option>Black</option></select>
-        <select><option>Select Size</option><option>One Size</option></select>
-        <input type="number" min="1" value="1" />
-        <button onclick="selectItem(this, 40)">Select Item</button>
+        <h2>Custom Leather Patch 5-Panel Rope Hat - $40.00</h2>
+        <label>Color:
+          <select>
+            <option>Black</option>
+          </select>
+        </label>
+        <label>Size:
+          <select>
+            <option>One Size</option>
+          </select>
+        </label>
+        <label>Quantity:
+          <input type="number" min="1" value="1" />
+        </label>
+        <button class="select-item" onclick="selectItem(this, 40)">Select Item</button>
       </div>
-    </div><div id="shirts" class="category">
-  <!-- Shirt product examples -->
-  <div class="product">
-    <h2>Navy Comfort Colors Pocket T-shirt</h2>
-    <p>$30.50</p>
-    <select><option>Navy</option><option>Black</option><option>Royal Blue</option><option>Dark Purple</option></select>
-    <select><option>Select Size</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option></select>
-    <input type="number" min="1" value="1" />
-    <button onclick="selectItem(this, 30.5)">Select Item</button>
-  </div>
-</div>
 
-<div id="hoodies" class="category">
-  <!-- Hoodie product examples -->
-  <div class="product">
-    <h2>Hanes EcoSmart Pullover Hoodie</h2>
-    <p>$49.99</p>
-    <select>
-      <option>White</option><option>Black</option><option>Light Blue</option>
-      <option>Athletic Purple</option><option>Wow Pink</option>
-      <option>Safety Green</option><option>Athletic Dark Green</option>
-    </select>
-    <select><option>Select Size</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option></select>
-    <input type="number" min="1" value="1" />
-    <button onclick="selectItem(this, 49.99)">Select Item</button>
-  </div>
-</div>
+      <div class="product">
+        <h2>Custom Flexfit On Field Flat Bill Baseball Hat - $40.00</h2>
+        <label>Color:
+          <select>
+            <option>Black</option>
+          </select>
+        </label>
+        <label>Size:
+          <select>
+            <option>One Size</option>
+          </select>
+        </label>
+        <label>Quantity:
+          <input type="number" min="1" value="1" />
+        </label>
+        <button class="select-item" onclick="selectItem(this, 40)">Select Item</button>
+      </div>
 
-  </div>  <div id="checkout" class="checkout-btn" onclick="checkout()">
+      <div class="product">
+        <h2>Custom Richardson Snapback Trucker Hat - $40.00</h2>
+        <label>Color:
+          <select>
+            <option>Black</option>
+            <option>White</option>
+          </select>
+        </label>
+        <label>Size:
+          <select>
+            <option>One Size</option>
+          </select>
+        </label>
+        <label>Quantity:
+          <input type="number" min="1" value="1" />
+        </label>
+        <button class="select-item" onclick="selectItem(this, 40)">Select Item</button>
+      </div>
+
+      <div class="product">
+        <h2>Richardson 112 & Yupoong 6606 with Ear Tag Patch - $40.00</h2>
+        <label>Color:
+          <select>
+            <option>Black</option>
+            <option>White</option>
+          </select>
+        </label>
+        <label>Size:
+          <select>
+            <option>One Size</option>
+          </select>
+        </label>
+        <label>Quantity:
+          <input type="number" min="1" value="1" />
+        </label>
+        <button class="select-item" onclick="selectItem(this, 40)">Select Item</button>
+      </div>
+
+      <div class="product">
+        <h2>Old School Camo Hat - $50.00</h2>
+        <label>Color:
+          <select>
+            <option>Camo</option>
+          </select>
+        </label>
+        <label>Size:
+          <select>
+            <option>One Size</option>
+          </select>
+        </label>
+        <label>Quantity:
+          <input type="number" min="1" value="1" />
+        </label>
+        <button class="select-item" onclick="selectItem(this, 50)">Select Item</button>
+      </div>
+    </div>
+
+    <!-- Shirts -->
+    <div id="shirts" class="category">
+      <div class="product">
+        <h2>Comfort Colors Pocket T-Shirt - $30.50</h2>
+        <label>Color:
+          <select>
+            <option>Navy</option>
+            <option>Black</option>
+            <option>Royal Blue</option>
+            <option>Dark Purple</option>
+          </select>
+        </label>
+        <label>Size:
+          <select>
+            <option>S</option>
+            <option>M</option>
+            <option>L</option>
+            <option>XL</option>
+            <option>2XL</option>
+          </select>
+        </label>
+        <label>Quantity:
+          <input type="number" min="1" value="1" />
+        </label>
+        <button class="select-item" onclick="selectItem(this, 30.5)">Select Item</button>
+      </div>
+    </div>
+
+    <!-- Hoodies -->
+    <div id="hoodies" class="category">
+      <div class="product">
+        <h2>Hanes EcoSmart Pullover Hoodie - $49.99</h2>
+        <label>Color:
+          <select>
+            <option>White</option>
+            <option>Black</option>
+            <option>Light Blue</option>
+            <option>Athletic Purple</option>
+            <option>Wow Pink</option>
+            <option>Safety Green</option>
+            <option>Athletic Dark Green</option>
+          </select>
+        </label>
+        <label>Size:
+          <select>
+            <option>S</option>
+            <option>M</option>
+            <option>L</option>
+            <option>XL</option>
+            <option>2XL</option>
+          </select>
+        </label>
+        <label>Quantity:
+          <input type="number" min="1" value="1" />
+        </label>
+        <button class="select-item" onclick="selectItem(this, 49.99)">Select Item</button>
+      </div>
+    </div>
+
+  </div>
+
+  <button id="checkout-btn" class="checkout-btn" onclick="checkout()">
     Checkout – $0.00
-  </div>  <script>
+  </button>
+
+  <script>
     let total = 0;
-    function selectItem(btn, price) {
-      const qtyInput = btn.previousElementSibling;
-      const qty = parseInt(qtyInput.value);
-      total += price * qty;
-      document.getElementById('checkout').style.display = 'block';
-      document.getElementById('checkout').innerText = `Checkout – $${total.toFixed(2)}`;
+
+    function selectItem(button, price) {
+      const productDiv = button.parentElement;
+      const quantityInput = productDiv.querySelector('input[type="number"]');
+      const quantity = parseInt(quantityInput.value);
+
+      // Add price * quantity to total
+      total += price * quantity;
+
+      // Update checkout button text
+      const checkoutBtn = document.getElementById('checkout-btn');
+      checkoutBtn.style.display = 'block';
+      checkoutBtn.textContent = `Checkout – $${total.toFixed(2)}`;
+
+      // Optionally disable the button to prevent double adding
+      button.disabled = true;
+      button.textContent = 'Selected';
     }
 
     function checkout() {
-      alert("Redirecting to Cash App with total: $" + total.toFixed(2));
+      alert(`Thank you for your purchase! Please send payment via Cash App to $YourCashAppTag. Total: $${total.toFixed(2)}`);
     }
 
-    function showCategory(cat) {
-      document.querySelectorAll('.category').forEach(div => div.classList.remove('visible'));
-      document.getElementById(cat).classList.add('visible');
+    function showCategory(categoryId) {
+      const categories = document.querySelectorAll('.category');
+      categories.forEach(cat => {
+        cat.style.display = 'none';
+      });
+      document.getElementById(categoryId).style.display = 'block';
     }
-  </script></body>
+
+    // Show shirts by default
+    showCategory('shirts');
+  </script>
+</body>
 </html>
-  
+ 
