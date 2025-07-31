@@ -35,5 +35,113 @@
     }
     select, button {
       margin-top: 0.5rem;
-      padding:
-     
+      padding: 0.5rem;
+    }
+    .checkout-btn {
+      position: fixed;
+      bottom: 1rem;
+      right: 1rem;
+      background-color: green;
+      color: white;
+      padding: 1rem;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>COWS ARE OUT OUTFITTERS</h1>
+    <p>Rustic gear for country folks 🐄</p>
+  </header>
+
+  <h2>Shirts - $30.50</h2>
+
+  <div class="product">
+    <h3>Comfort Colors Pocket T-Shirts</h3>
+    <img src="https://customink-res.cloudinary.com/images/catalog/422300/aa_2188888/flat/width_320,c_pad,dpr_2,f_auto/4410/comfort-colors-100-cotton-pocket-t-shirt.jpg" alt="Comfort Colors Shirt" />
+    <p>Available in Navy, Black, Royal Blue, Dark Purple</p>
+    <label for="shirt-size">Size:</label>
+    <select id="shirt-size">
+      <option>Small</option>
+      <option>Medium</option>
+      <option>Large</option>
+      <option>XL</option>
+      <option>2XL</option>
+    </select>
+    <label for="shirt-color">Color:</label>
+    <select id="shirt-color">
+      <option>Navy</option>
+      <option>Black</option>
+      <option>Royal Blue</option>
+      <option>Dark Purple</option>
+    </select>
+  </div>
+
+  <h2>Hoodies - $49.99</h2>
+
+  <div class="product">
+    <h3>Hanes EcoSmart 50/50 Pullover Hoodie</h3>
+    <img src="https://customink-res.cloudinary.com/images/catalog/509100/aa_2196725/flat/width_320,c_pad,dpr_2,f_auto/2600/hanes-ecosmart-50-50-pullover-hoodie.jpg" alt="EcoSmart Hoodie" />
+    <p>Available in White, Black, Light Blue, Athletic Purple, Wow Pink, Safety Green, Athletic Dark Green</p>
+    <label for="hoodie-size">Size:</label>
+    <select id="hoodie-size">
+      <option>Small</option>
+      <option>Medium</option>
+      <option>Large</option>
+      <option>XL</option>
+      <option>2XL</option>
+    </select>
+    <label for="hoodie-color">Color:</label>
+    <select id="hoodie-color">
+      <option>White</option>
+      <option>Black</option>
+      <option>Light Blue</option>
+      <option>Athletic Purple</option>
+      <option>Wow Pink</option>
+      <option>Safety Green</option>
+      <option>Athletic Dark Green</option>
+    </select>
+    <p>Logo color depends on hoodie color: white logo for dark colors, black logo for light colors.</p>
+  </div>
+
+  <h2>Hats</h2>
+
+  <div class="product">
+    <h3>5-Panel Leather Patch Rope Hat - $40.00</h3>
+    <img src="https://images.customink.com/images/_AI/product/622900/622900_flat_front_medium.jpg" alt="5-panel rope hat"/>
+    <p>Black logo on leather patch</p>
+  </div>
+
+  <div class="product">
+    <h3>Flat Bill Baseball Hat - $40.00</h3>
+    <img src="https://images.customink.com/images/_AI/product/152800/152800_flat_front_medium.jpg" alt="Flat Bill Hat"/>
+    <p>Black logo on front</p>
+  </div>
+
+  <div class="product">
+    <h3>Richardson Snapback Trucker Hat - $40.00</h3>
+    <img src="https://images.customink.com/images/_AI/product/442100/442100_flat_front_medium.jpg" alt="Snapback Trucker Hat"/>
+    <p>White logo on front</p>
+  </div>
+
+  <div class="product">
+    <h3>Richardson 112 & Yupoong 6606 (Ear Tag Patch) - $40.00</h3>
+    <img src="https://cdn.shopify.com/s/files/1/0680/4150/7115/files/ear-tag-patch.jpg?v=1715180952" alt="Ear Tag Patch Hats"/>
+    <p>Leather patch with cow ear tag shape + logo</p>
+  </div>
+
+  <div class="product">
+    <h3>Old School Camo Hat - $50.00</h3>
+    <img src="https://images.customink.com/images/_AI/product/258000/258000_flat_front_medium.jpg" alt="Old School Camo Hat"/>
+    <p>Premium camo style with logo patch</p>
+  </div>
+
+  <button class="checkout-btn" onclick="alert('To complete checkout, please send payment via Cash App to $YourTagName and message us your order details.')">
+    Checkout
+  </button>
+
+</body>
+</html>
+   
