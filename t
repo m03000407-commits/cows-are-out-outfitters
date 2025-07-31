@@ -1,1 +1,0 @@
-<img src="images/your-image-file.jpg" alt="Description" />
