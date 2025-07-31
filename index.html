@@ -1,295 +1,178 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Cows Are Out Outfitters</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>COWS ARE OUT OUTFITTERS</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       margin: 0;
-      background: #f5f5f5;
+      padding: 0;
+      background-color: #f2f2f2;
     }
-    header {
-      background: #222;
-      color: white;
-      padding: 1rem;
+    nav {
+      background-color: #fff;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      padding: 1rem;
+      border-bottom: 2px solid #ddd;
     }
     nav a {
-      color: white;
-      margin: 0 1rem;
+      font-size: 1.2rem;
       text-decoration: underline;
       font-weight: bold;
+      color: #333;
       cursor: pointer;
-      font-size: 1.2rem; /* bigger font */
-      transition: color 0.3s ease;
-    }
-    nav a:hover {
-      text-decoration: none;
-      color: #a0d468; /* highlight color on hover */
     }
     .container {
-      padding: 2rem;
-    }
-    .category {
-      display: none;
-    }
-    .category.active {
-      display: block;
+      padding: 1rem;
     }
     .product {
       background: white;
-      border: 1px solid #ccc;
-      border-radius: 8px;
       padding: 1rem;
-      margin-bottom: 1rem;
+      margin: 1rem 0;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    .product h2 {
-      margin-top: 0;
-    }
-    select, input[type=number] {
-      margin: 0.5rem 0;
-      padding: 0.3rem;
-      width: 100%;
-      box-sizing: border-box;
-    }
-    button.select-item {
-      background: #28a745;
-      color: white;
-      border: none;
-      padding: 0.5rem;
-      width: 100%;
-      cursor: pointer;
-      font-weight: bold;
-      border-radius: 5px;
-    }
-    button.select-item:hover {
-      background: #218838;
-    }
+    .hidden { display: none; }
     .checkout-btn {
       position: fixed;
       bottom: 20px;
       right: 20px;
-      background: green;
+      padding: 1rem;
+      background-color: #4CAF50;
       color: white;
-      padding: 1rem 2rem;
       border: none;
-      border-radius: 30px;
-      font-weight: bold;
-      cursor: pointer;
+      border-radius: 10px;
+      font-size: 1.2rem;
       display: none;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      cursor: pointer;
+    }
+    #uploadSection {
+      padding: 1rem;
+      background: white;
+      margin: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Cows Are Out Outfitters</h1>
-    <nav>
-      <a onclick="showCategory('hats')">Hats</a>
-      <a onclick="showCategory('shirts')">Shirts</a>
-      <a onclick="showCategory('hoodies')">Hoodies</a>
-    </nav>
-  </header>
+  <nav>
+    <a onclick="showCategory('hats')">Hats</a>
+    <a onclick="showCategory('shirts')">Shirts</a>
+    <a onclick="showCategory('hoodies')">Hoodies</a>
+  </nav>  <div id="uploadSection">
+    <h2>Upload Cow Images</h2>
+    <input type="file" multiple onchange="handleImageUpload(event)" />
+    <div id="uploadedImages"></div>
+  </div>  <div class="container">
+    <div id="homepage">
+      <h1>Welcome to COWS ARE OUT OUTFITTERS!</h1>
+      <p>Fun Facts About Us:</p>
+      <ul>
+        <li>We're 100% rustic and country-inspired.</li>
+        <li>All designs feature real Angus cow vibes.</li>
+        <li>Cash App checkout is supported!</li>
+      </ul>
+    </div><div id="products"></div>
 
-  <div class="container">
-
-    <!-- Hats -->
-    <div id="hats" class="category">
-      <div class="product">
-        <h2>Custom Leather Patch 5-Panel Rope Hat - $40.00</h2>
-        <label>Color:
-          <select>
-            <option>Black</option>
-          </select>
-        </label>
-        <label>Size:
-          <select>
-            <option>One Size</option>
-          </select>
-        </label>
-        <label>Quantity:
-          <input type="number" min="1" value="1" />
-        </label>
-        <button class="select-item" onclick="selectItem(this, 40)">Select Item</button>
-      </div>
-
-      <div class="product">
-        <h2>Custom Flexfit On Field Flat Bill Baseball Hat - $40.00</h2>
-        <label>Color:
-          <select>
-            <option>Black</option>
-          </select>
-        </label>
-        <label>Size:
-          <select>
-            <option>One Size</option>
-          </select>
-        </label>
-        <label>Quantity:
-          <input type="number" min="1" value="1" />
-        </label>
-        <button class="select-item" onclick="selectItem(this, 40)">Select Item</button>
-      </div>
-
-      <div class="product">
-        <h2>Custom Richardson Snapback Trucker Hat - $40.00</h2>
-        <label>Color:
-          <select>
-            <option>Black</option>
-            <option>White</option>
-          </select>
-        </label>
-        <label>Size:
-          <select>
-            <option>One Size</option>
-          </select>
-        </label>
-        <label>Quantity:
-          <input type="number" min="1" value="1" />
-        </label>
-        <button class="select-item" onclick="selectItem(this, 40)">Select Item</button>
-      </div>
-
-      <div class="product">
-        <h2>Richardson 112 & Yupoong 6606 with Ear Tag Patch - $40.00</h2>
-        <label>Color:
-          <select>
-            <option>Black</option>
-            <option>White</option>
-          </select>
-        </label>
-        <label>Size:
-          <select>
-            <option>One Size</option>
-          </select>
-        </label>
-        <label>Quantity:
-          <input type="number" min="1" value="1" />
-        </label>
-        <button class="select-item" onclick="selectItem(this, 40)">Select Item</button>
-      </div>
-
-      <div class="product">
-        <h2>Old School Camo Hat - $50.00</h2>
-        <label>Color:
-          <select>
-            <option>Camo</option>
-          </select>
-        </label>
-        <label>Size:
-          <select>
-            <option>One Size</option>
-          </select>
-        </label>
-        <label>Quantity:
-          <input type="number" min="1" value="1" />
-        </label>
-        <button class="select-item" onclick="selectItem(this, 50)">Select Item</button>
-      </div>
-    </div>
-
-    <!-- Shirts -->
-    <div id="shirts" class="category">
-      <div class="product">
-        <h2>Comfort Colors Pocket T-Shirt - $30.50</h2>
-        <label>Color:
-          <select>
-            <option>Navy</option>
-            <option>Black</option>
-            <option>Royal Blue</option>
-            <option>Dark Purple</option>
-          </select>
-        </label>
-        <label>Size:
-          <select>
-            <option>S</option>
-            <option>M</option>
-            <option>L</option>
-            <option>XL</option>
-            <option>2XL</option>
-          </select>
-        </label>
-        <label>Quantity:
-          <input type="number" min="1" value="1" />
-        </label>
-        <button class="select-item" onclick="selectItem(this, 30.5)">Select Item</button>
-      </div>
-    </div>
-
-    <!-- Hoodies -->
-    <div id="hoodies" class="category">
-      <div class="product">
-        <h2>Hanes EcoSmart Pullover Hoodie - $49.99</h2>
-        <label>Color:
-          <select>
-            <option>White</option>
-            <option>Black</option>
-            <option>Light Blue</option>
-            <option>Athletic Purple</option>
-            <option>Wow Pink</option>
-            <option>Safety Green</option>
-            <option>Athletic Dark Green</option>
-          </select>
-        </label>
-        <label>Size:
-          <select>
-            <option>S</option>
-            <option>M</option>
-            <option>L</option>
-            <option>XL</option>
-            <option>2XL</option>
-          </select>
-        </label>
-        <label>Quantity:
-          <input type="number" min="1" value="1" />
-        </label>
-        <button class="select-item" onclick="selectItem(this, 49.99)">Select Item</button>
-      </div>
-    </div>
-
-  </div>
-
-  <button id="checkout-btn" class="checkout-btn" onclick="checkout()">
-    Checkout – $0.00
-  </button>
+  </div><button id="checkoutBtn" class="checkout-btn">Checkout – $0.00</button>
 
   <script>
-    let total = 0;
+    const categories = {
+      hats: [],
+      shirts: [],
+      hoodies: []
+    };
 
-    function selectItem(button, price) {
-      const productDiv = button.parentElement;
-      const quantityInput = productDiv.querySelector('input[type="number"]');
-      const quantity = parseInt(quantityInput.value);
+    const exampleProducts = [
+      {
+        name: "Navy Comfort Colors Shirt",
+        category: "shirts",
+        price: 30.50,
+        colors: ["navy", "black", "royal blue", "dark purple"],
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        image: "shirt.jpg"
+      },
+      {
+        name: "Custom Rope Hat",
+        category: "hats",
+        price: 40.00,
+        colors: ["black", "khaki"],
+        sizes: ["One Size"],
+        image: "ropehat.jpg"
+      },
+      {
+        name: "Hanes Pullover Hoodie",
+        category: "hoodies",
+        price: 49.99,
+        colors: ["white", "black", "light blue", "athletic purple", "wow pink", "safety green", "athletic dark green"],
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        image: "hoodie.jpg"
+      }
+    ];
 
-      total += price * quantity;
+    let selectedItems = [];
 
-      const checkoutBtn = document.getElementById('checkout-btn');
-      checkoutBtn.style.display = 'block';
-      checkoutBtn.textContent = `Checkout – $${total.toFixed(2)}`;
-
-      button.disabled = true;
-      button.textContent = 'Selected';
-    }
-
-    function checkout() {
-      alert(`Thank you for your purchase! Please send payment via Cash App to $YourCashAppTag. Total: $${total.toFixed(2)}`);
-    }
-
-    function showCategory(categoryId) {
-      const categories = document.querySelectorAll('.category');
-      categories.forEach(cat => {
-        cat.style.display = 'none';
+    function showCategory(cat) {
+      document.getElementById("homepage").style.display = "none";
+      const container = document.getElementById("products");
+      container.innerHTML = "";
+      exampleProducts.filter(p => p.category === cat).forEach(product => {
+        const el = document.createElement("div");
+        el.className = "product";
+        el.innerHTML = `
+          <h3>${product.name}</h3>
+          <img src="${product.image}" width="200" /><br>
+          Color:
+          <select>
+            ${product.colors.map(c => `<option value="${c}">${c}</option>`).join('')}
+          </select><br>
+          Size:
+          <select>
+            ${product.sizes.map(s => `<option value="${s}">${s}</option>`).join('')}
+          </select><br>
+          Quantity:
+          <input type="number" value="1" min="1" style="width: 50px" /><br>
+          <button onclick="selectItem('${product.name}', ${product.price}, this)">Select Item</button>
+        `;
+        container.appendChild(el);
       });
-      document.getElementById(categoryId).style.display = 'block';
     }
 
-    // Show shirts by default
-    showCategory('shirts');
-  </script>
-</body>
+    function selectItem(name, price, btn) {
+      const container = btn.parentElement;
+      const quantity = parseInt(container.querySelector("input[type=number]").value);
+      const total = price * quantity;
+      selectedItems.push(total);
+      updateCheckout();
+    }
+
+    function updateCheckout() {
+      const total = selectedItems.reduce((sum, x) => sum + x, 0).toFixed(2);
+      const btn = document.getElementById("checkoutBtn");
+      btn.innerText = `Checkout – $${total}`;
+      btn.style.display = "block";
+    }
+
+    function handleImageUpload(event) {
+      const files = event.target.files;
+      const container = document.getElementById("uploadedImages");
+      container.innerHTML = "";
+      for (let file of files) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const img = document.createElement("img");
+          img.src = e.target.result;
+          img.style.maxWidth = "150px";
+          img.style.margin = "5px";
+          container.appendChild(img);
+        }
+        reader.readAsDataURL(file);
+      }
+    }
+  </script></body>
 </html>
  
