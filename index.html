@@ -1,147 +1,130 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>COWS ARE OUT OUTFITTERS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cows Are Out Outfitters</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f9f5f1;
-      color: #2e2e2e;
       margin: 0;
-      padding: 0 1rem;
+      background: #f5f5f5;
     }
     header {
-      background-color: #1e1e1e;
-      color: white;
-      text-align: center;
-      padding: 1rem;
+      background: #222;
+      color: #fff;
+      padding: 1em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    h1 {
-      font-size: 2rem;
+    nav a {
+      color: #fff;
+      margin: 0 1em;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .container {
+      padding: 2em;
     }
     .product {
+      background: #fff;
       border: 1px solid #ccc;
-      padding: 1rem;
-      margin: 1rem 0;
-      border-radius: 8px;
-      background-color: white;
-    }
-    .product img {
-      width: 100%;
-      max-width: 300px;
-      border-radius: 8px;
-    }
-    select, button {
-      margin-top: 0.5rem;
-      padding: 0.5rem;
+      padding: 1em;
+      margin-bottom: 1em;
     }
     .checkout-btn {
       position: fixed;
-      bottom: 1rem;
-      right: 1rem;
-      background-color: green;
+      bottom: 20px;
+      right: 20px;
+      background: green;
       color: white;
-      padding: 1rem;
-      border: none;
-      border-radius: 50px;
-      font-size: 1rem;
+      padding: 1em;
+      display: none;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    select, input[type=number] {
+      margin: 0.5em 0;
+      padding: 0.3em;
+    }
+    .category {
+      display: none;
+    }
+    .visible {
+      display: block;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>COWS ARE OUT OUTFITTERS</h1>
-    <p>Rustic gear for country folks 🐄</p>
+    <h1>Cows Are Out Outfitters</h1>
+    <nav>
+      <a href="#" onclick="showCategory('hats')">Hats</a>
+      <a href="#" onclick="showCategory('shirts')">Shirts</a>
+      <a href="#" onclick="showCategory('hoodies')">Hoodies</a>
+    </nav>
   </header>
-
-  <h2>Shirts - $30.50</h2>
-
+  <div class="container">
+    <!-- Cow images and fun facts will be added here -->
+    <div id="hats" class="category">
+      <!-- Hat product examples -->
+      <div class="product">
+        <h2>Custom Leather Patch 5-Panel Rope Hat</h2>
+        <p>$40.00</p>
+        <select><option>Select Color</option><option>Black</option></select>
+        <select><option>Select Size</option><option>One Size</option></select>
+        <input type="number" min="1" value="1" />
+        <button onclick="selectItem(this, 40)">Select Item</button>
+      </div>
+    </div><div id="shirts" class="category">
+  <!-- Shirt product examples -->
   <div class="product">
-    <h3>Comfort Colors Pocket T-Shirts</h3>
-    <img src="https://customink-res.cloudinary.com/images/catalog/422300/aa_2188888/flat/width_320,c_pad,dpr_2,f_auto/4410/comfort-colors-100-cotton-pocket-t-shirt.jpg" alt="Comfort Colors Shirt" />
-    <p>Available in Navy, Black, Royal Blue, Dark Purple</p>
-    <label for="shirt-size">Size:</label>
-    <select id="shirt-size">
-      <option>Small</option>
-      <option>Medium</option>
-      <option>Large</option>
-      <option>XL</option>
-      <option>2XL</option>
+    <h2>Navy Comfort Colors Pocket T-shirt</h2>
+    <p>$30.50</p>
+    <select><option>Navy</option><option>Black</option><option>Royal Blue</option><option>Dark Purple</option></select>
+    <select><option>Select Size</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option></select>
+    <input type="number" min="1" value="1" />
+    <button onclick="selectItem(this, 30.5)">Select Item</button>
+  </div>
+</div>
+
+<div id="hoodies" class="category">
+  <!-- Hoodie product examples -->
+  <div class="product">
+    <h2>Hanes EcoSmart Pullover Hoodie</h2>
+    <p>$49.99</p>
+    <select>
+      <option>White</option><option>Black</option><option>Light Blue</option>
+      <option>Athletic Purple</option><option>Wow Pink</option>
+      <option>Safety Green</option><option>Athletic Dark Green</option>
     </select>
-    <label for="shirt-color">Color:</label>
-    <select id="shirt-color">
-      <option>Navy</option>
-      <option>Black</option>
-      <option>Royal Blue</option>
-      <option>Dark Purple</option>
-    </select>
+    <select><option>Select Size</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option></select>
+    <input type="number" min="1" value="1" />
+    <button onclick="selectItem(this, 49.99)">Select Item</button>
   </div>
+</div>
 
-  <h2>Hoodies - $49.99</h2>
+  </div>  <div id="checkout" class="checkout-btn" onclick="checkout()">
+    Checkout – $0.00
+  </div>  <script>
+    let total = 0;
+    function selectItem(btn, price) {
+      const qtyInput = btn.previousElementSibling;
+      const qty = parseInt(qtyInput.value);
+      total += price * qty;
+      document.getElementById('checkout').style.display = 'block';
+      document.getElementById('checkout').innerText = `Checkout – $${total.toFixed(2)}`;
+    }
 
-  <div class="product">
-    <h3>Hanes EcoSmart 50/50 Pullover Hoodie</h3>
-    <img src="https://customink-res.cloudinary.com/images/catalog/509100/aa_2196725/flat/width_320,c_pad,dpr_2,f_auto/2600/hanes-ecosmart-50-50-pullover-hoodie.jpg" alt="EcoSmart Hoodie" />
-    <p>Available in White, Black, Light Blue, Athletic Purple, Wow Pink, Safety Green, Athletic Dark Green</p>
-    <label for="hoodie-size">Size:</label>
-    <select id="hoodie-size">
-      <option>Small</option>
-      <option>Medium</option>
-      <option>Large</option>
-      <option>XL</option>
-      <option>2XL</option>
-    </select>
-    <label for="hoodie-color">Color:</label>
-    <select id="hoodie-color">
-      <option>White</option>
-      <option>Black</option>
-      <option>Light Blue</option>
-      <option>Athletic Purple</option>
-      <option>Wow Pink</option>
-      <option>Safety Green</option>
-      <option>Athletic Dark Green</option>
-    </select>
-    <p>Logo color depends on hoodie color: white logo for dark colors, black logo for light colors.</p>
-  </div>
+    function checkout() {
+      alert("Redirecting to Cash App with total: $" + total.toFixed(2));
+    }
 
-  <h2>Hats</h2>
-
-  <div class="product">
-    <h3>5-Panel Leather Patch Rope Hat - $40.00</h3>
-    <img src="https://images.customink.com/images/_AI/product/622900/622900_flat_front_medium.jpg" alt="5-panel rope hat"/>
-    <p>Black logo on leather patch</p>
-  </div>
-
-  <div class="product">
-    <h3>Flat Bill Baseball Hat - $40.00</h3>
-    <img src="https://images.customink.com/images/_AI/product/152800/152800_flat_front_medium.jpg" alt="Flat Bill Hat"/>
-    <p>Black logo on front</p>
-  </div>
-
-  <div class="product">
-    <h3>Richardson Snapback Trucker Hat - $40.00</h3>
-    <img src="https://images.customink.com/images/_AI/product/442100/442100_flat_front_medium.jpg" alt="Snapback Trucker Hat"/>
-    <p>White logo on front</p>
-  </div>
-
-  <div class="product">
-    <h3>Richardson 112 & Yupoong 6606 (Ear Tag Patch) - $40.00</h3>
-    <img src="https://cdn.shopify.com/s/files/1/0680/4150/7115/files/ear-tag-patch.jpg?v=1715180952" alt="Ear Tag Patch Hats"/>
-    <p>Leather patch with cow ear tag shape + logo</p>
-  </div>
-
-  <div class="product">
-    <h3>Old School Camo Hat - $50.00</h3>
-    <img src="https://images.customink.com/images/_AI/product/258000/258000_flat_front_medium.jpg" alt="Old School Camo Hat"/>
-    <p>Premium camo style with logo patch</p>
-  </div>
-
-  <button class="checkout-btn" onclick="alert('To complete checkout, please send payment via Cash App to $YourTagName and message us your order details.')">
-    Checkout
-  </button>
-
-</body>
+    function showCategory(cat) {
+      document.querySelectorAll('.category').forEach(div => div.classList.remove('visible'));
+      document.getElementById(cat).classList.add('visible');
+    }
+  </script></body>
 </html>
-   
+  
