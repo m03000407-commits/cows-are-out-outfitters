@@ -6,155 +6,86 @@
   <title>Cows Are Out Outfitters</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #fffef9;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      background-color: #2f2f2f;
-      color: white;
-      padding: 15px;
+      font-family: Georgia, serif;
+      background-color: #f8f4f0;
+      color: #2b2b2b;
       text-align: center;
-    }
-    nav {
-      display: flex;
-      justify-content: center;
-      background-color: #444;
-      padding: 10px;
-      gap: 15px;
-    }
-    nav a {
-      color: white;
-      text-decoration: underline;
-      font-size: 18px;
-    }
-    .product-category {
-      display: none;
       padding: 20px;
+      background-image: url('https://images.unsplash.com/photo-1604136726925-d32d4935c1d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+      background-size: cover;
+      background-position: center;
     }
+
+    .container {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 12px;
+      padding: 40px;
+      max-width: 800px;
+      margin: auto;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 1.5em;
+      color: #5c4033;
+    }
+
     .product {
-      border: 1px solid #ddd;
-      padding: 10px;
-      margin: 10px;
+      margin: 20px 0;
     }
-    .checkout {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: green;
+
+    .button {
+      background-color: #5c4033;
       color: white;
-      padding: 10px 20px;
-      display: none;
+      padding: 10px 25px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
     }
-    .cow-gallery {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      padding: 10px;
-      gap: 10px;
+
+    .button:hover {
+      background-color: #7a563e;
     }
-    .cow-gallery img {
-      max-width: 100%;
-      width: 200px;
-      border-radius: 10px;
+
+    .footer {
+      margin-top: 40px;
+      font-size: 0.9em;
+      color: #555;
     }
   </style>
 </head>
 <body>
+  <div class="container">
+    <h1>🐄 Cows Are Out Outfitters</h1>
+    <h2>Rustic Country Apparel | Angus Cow Themed</h2>
 
-<header>
-  <h1>Cows Are Out Outfitters</h1>
-</header>
+    <div class="product">
+      <h3>🧢 Hats</h3>
+      <p>Country-style hats with Angus cow flair.</p>
+      <button class="button">Buy with Cash App</button>
+    </div>
 
-<nav>
-  <a href="#" onclick="showCategory('hats')">Hats</a>
-  <a href="#" onclick="showCategory('shirts')">Shirts</a>
-  <a href="#" onclick="showCategory('hoodies')">Hoodies</a>
-</nav>
+    <div class="product">
+      <h3>👕 T-Shirts</h3>
+      <p>Comfortable tees for barn days & bonfires.</p>
+      <button class="button">Buy with Cash App</button>
+    </div>
 
-<section id="homepage">
-  <div class="cow-gallery">
-    <img src="cow1.jpg" alt="Cow 1">
-    <img src="cow2.jpg" alt="Cow 2">
-    <img src="cow3.jpg" alt="Cow 3">
+    <div class="product">
+      <h3>🧥 Hoodies</h3>
+      <p>Stay warm and rustic with our Angus cow hoodies.</p>
+      <button class="button">Buy with Cash App</button>
+    </div>
+
+    <div class="footer">
+      <p>Website by Cows Are Out Outfitters © 2025</p>
+    </div>
   </div>
-  <div style="text-align:center; padding: 20px;">
-    <h2>Fun Facts</h2>
-    <p>We love cows. Our outfitters are inspired by country life and Angus pride.</p>
-  </div>
-</section>
-
-<section id="hats" class="product-category">
-  <h2>Hats</h2>
-  <div class="product">
-    <p>Custom Leather Patch 5-Panel Rope Hat - $40.00</p>
-    <button onclick="selectItem(40)">Select Item</button>
-    <input type="number" min="1" value="1" onchange="updateQuantity(this, 40)">
-  </div>
-  <div class="product">
-    <p>Old School Camo Hat - $50.00</p>
-    <button onclick="selectItem(50)">Select Item</button>
-    <input type="number" min="1" value="1" onchange="updateQuantity(this, 50)">
-  </div>
-</section>
-
-<section id="shirts" class="product-category">
-  <h2>Shirts</h2>
-  <div class="product">
-    <p>Navy, Black, Royal Blue, Dark Purple - $30.50</p>
-    <button onclick="selectItem(30.5)">Select Item</button>
-    <input type="number" min="1" value="1" onchange="updateQuantity(this, 30.5)">
-  </div>
-</section>
-
-<section id="hoodies" class="product-category">
-  <h2>Hoodies</h2>
-  <div class="product">
-    <p>All Colors + Sizes - $49.99</p>
-    <button onclick="selectItem(49.99)">Select Item</button>
-    <input type="number" min="1" value="1" onchange="updateQuantity(this, 49.99)">
-  </div>
-</section>
-
-<div id="checkoutBtn" class="checkout" onclick="checkout()">
-  Checkout – $0.00
-</div>
-
-<script>
-  let total = 0;
-
-  function showCategory(category) {
-    document.getElementById("homepage").style.display = "none";
-    document.querySelectorAll(".product-category").forEach(cat => cat.style.display = "none");
-    document.getElementById(category).style.display = "block";
-  }
-
-  function selectItem(price) {
-    total += price;
-    document.getElementById("checkoutBtn").style.display = "block";
-    updateCheckout();
-  }
-
-  function updateQuantity(input, unitPrice) {
-    const qty = parseInt(input.value);
-    const parent = input.closest(".product");
-    const selected = parent.querySelector("button.selected");
-    if (selected) {
-      total -= unitPrice;
-      total += qty * unitPrice;
-      updateCheckout();
-    }
-  }
-
-  function updateCheckout() {
-    document.getElementById("checkoutBtn").textContent = "Checkout – $" + total.toFixed(2);
-  }
-
-  function checkout() {
-    alert("Send $" + total.toFixed(2) + " to our Cash App: $YourCashTag");
-  }
-</script>
-
 </body>
 </html>
